@@ -1,0 +1,21 @@
+###create user
+POST http://localhost:4000/users-api/users
+Content-Type: application/json
+
+{
+    "name":"rakesh",
+    "email":"rakesh1@gmamil.com",
+    "dateOfBirth":"2005-06-18",
+    "mobileNumber":1234567890
+}
+### read all users
+GET http://localhost:4000/users-api/users
+
+### get user by id
+GET http://localhost:4000/users-api/users/69a69481f22fcabf1f85bc12
+
+###delete user by id
+DELETE http://localhost:4000/users-api/users/69a69481f22fcabf1f85bc12
+
+###activate user
+PATCH http://localhost:4000/users-api/users/69a69481f22fcabf1f85bc12
