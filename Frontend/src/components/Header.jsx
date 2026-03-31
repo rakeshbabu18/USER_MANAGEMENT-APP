@@ -7,7 +7,7 @@ function Header() {
       <img src={null} alt="" />
       <ul>
         <li>
-           <NavLink to="/" className={({isActive})=> (isActive?"bg-blue-400 text-lime-50 rounded-2xl p-2 shadow me-5":"")}>
+           <NavLink to="/" className={({isActive})=> (isActive?"bg-blue-400 text-lime-50 rounded-2xl p-2 pr-4 shadow me-5":"")}>
             Home
            </NavLink>
            <NavLink to="/add-user" className={({isActive})=> (isActive?"bg-blue-400 text-lime-50 rounded-2xl p-2 shadow":"")}>

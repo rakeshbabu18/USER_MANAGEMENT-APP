@@ -1,18 +1,17 @@
 import React,{useState} from 'react'
 import {useForm} from 'react-hook-form'
-import { useNavigate, Link } from 'react-router'
+import { useNavigate } from 'react-router'
+import { toast } from 'react-toastify'
 
 function AddUser() {
-    const {register,handleSubmit, formState: { errors }} = useForm()
+  const {register, handleSubmit, reset, formState: { errors }} = useForm()
     const navigate = useNavigate()
     let [loading, setLoading] = useState(false)
     let [error, setError] = useState(null)
-    let [success, setSuccess] = useState(false)
 
     const onUserCreate = async (newUser) => {
         setLoading(true)
         setError(null)
-        setSuccess(false)
         
         try {
             let res = await fetch("http://localhost:4000/users-api/users", {
@@ -26,6 +25,11 @@ function AddUser() {
             let data = await res.json()
             
             if (res.status === 201) {
+              reset()
+              toast.success('User registered successfully!')
+              navigate('/users-list')
+            } else {
+              setError(data?.message || 'Unable to create user. Please try again.')
             }
         }
         catch(err){
@@ -61,9 +65,20 @@ function AddUser() {
                 <input 
                   type="text" 
                   placeholder='Enter full name' 
-                  {...register('name')} 
+                  {...register('name', {
+                    required: 'Full name is required',
+                    minLength: {
+                      value: 3,
+                      message: 'Full name must be at least 3 characters'
+                    },
+                    pattern: {
+                      value: /^[A-Za-z ]+$/,
+                      message: 'Full name can contain only letters and spaces'
+                    }
+                  })} 
                   className='w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-gray-50'
                 />
+                {errors.name && <p className='text-sm text-red-600'>{errors.name.message}</p>}
               </div>
               
               <div className='space-y-2'>
@@ -71,18 +86,34 @@ function AddUser() {
                 <input 
                   type="email" 
                   placeholder='test@example.com' 
-                  {...register('email')} 
+                  {...register('email', {
+                    required: 'Email is required',
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: 'Enter a valid email address'
+                    }
+                  })} 
                   className='w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-gray-50'
                 />
+                {errors.email && <p className='text-sm text-red-600'>{errors.email.message}</p>}
               </div>
               
               <div className='space-y-2'>
                 <label className='block text-sm font-semibold text-gray-700'>Date of Birth</label>
                 <input 
                   type="date" 
-                  {...register('dateOfBirth')} 
+                  {...register('dateOfBirth', {
+                    required: 'Date of birth is required',
+                    validate: (value) => {
+                      const selectedDate = new Date(value)
+                      const today = new Date()
+                      today.setHours(0, 0, 0, 0)
+                      return selectedDate < today || 'Date of birth must be in the past'
+                    }
+                  })} 
                   className='w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-gray-50 text-gray-700'
                 />
+                {errors.dateOfBirth && <p className='text-sm text-red-600'>{errors.dateOfBirth.message}</p>}
               </div>
               
               <div className='space-y-2'>
@@ -90,9 +121,16 @@ function AddUser() {
                 <input 
                   type="text" 
                   placeholder='+91 XXXXX XXXXX' 
-                  {...register('mobileNumber')} 
+                  {...register('mobileNumber', {
+                    required: 'Mobile number is required',
+                    pattern: {
+                      value: /^\+?[0-9]{10}$/,
+                      message: 'Mobile number must be 10 digits'
+                    }
+                  })} 
                   className='w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-gray-50'
                 />
+                {errors.mobileNumber && <p className='text-sm text-red-600'>{errors.mobileNumber.message}</p>}
               </div>
             </div>
             
