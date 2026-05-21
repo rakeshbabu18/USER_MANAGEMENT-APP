@@ -1,16 +1,47 @@
-# React + Vite
+# User Management Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the client-side component of the User Management App, built with React and Vite.
 
-Currently, two official plugins are available:
+## Technologies & Packages Installed
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **react** & **react-dom**: Core React libraries.
+- **vite**: Next-generation frontend tooling for fast development.
+- **react-router**: Declarative routing for React.
+- **react-hook-form**: Performant, flexible and extensible forms with easy-to-use validation.
+- **react-toastify**: Add notifications to your app with ease.
+- **tailwindcss** & **@tailwindcss/vite**: Utility-first CSS framework for styling.
+- **eslint**: For identifying and reporting on patterns found in ECMAScript/JavaScript code.
 
-## React Compiler
+## Installation Steps
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Navigate to the Frontend directory:
+   ```bash
+   cd Frontend
+   ```
 
-## Expanding the ESLint configuration
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Build for production:
+   ```bash
+   npm run build
+   ```
+
+## Development
+
+The frontend is configured to connect to the backend at `http://localhost:4000` by default. Ensure the backend is running before testing API-related features.
+
+## Main Components
+
+- `AddUser`: Form to create new user records.
+- `UsersList`: Displays a list of all registered users.
+- `User`: Detailed view for a specific user.
+- `RootLayout`: Common layout containing Header and Footer.
+
