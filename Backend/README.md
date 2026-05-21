@@ -22,14 +22,9 @@ This is the server-side component of the User Management App. It provides APIs t
    npm install
    ```
 
-3. Configure Environment Variables:
-   Create a `.env` file in the `Backend` root and add the following:
-   ```env
-   PORT=4000
-   DB_URL=<your-mongodb-connection-string>
    ```
 
-4. Run the server:
+3. Run the server:
    - For production/standard run:
      ```bash
      npm start
